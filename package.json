@@ -1,0 +1,25 @@
+{
+  "name": "Modularbank-assignment",
+  "version": "1.0.0",
+  "dependencies": {
+    "cypress": "^4.10.0",
+    "cypress-localstorage-commands": "^1.2.1",
+    "faker": "^4.1.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.4"
+  },
+  "standard": {
+    "globals": [
+      "cy",
+      "it",
+      "describe",
+      "beforeEach",
+      "before",
+      "after",
+      "expect",
+      "Cypress",
+      "localStorage"
+    ]
+  }
+}
