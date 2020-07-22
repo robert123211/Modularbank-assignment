@@ -1,4 +1,6 @@
 import faker from 'faker'
+import { getCurrentDateString, getCurrentTimestamp } from '../utils'
+
 export const CUSTOMER_POST_URL = 'https://person-api.sandbox.modularbank.xyz/api/v1/persons'
 export const ACCOUNT_BASE_URL = 'https://account-api.sandbox.modularbank.xyz/api/v1'
 export const ACCOUNT_POST_URL = (personId) => `${ACCOUNT_BASE_URL}/persons/${personId}/accounts`
@@ -69,5 +71,41 @@ export const CORRECT_ACCOUNT_BODY = (personId, personName) => {
       sourceName: 'TEST',
       sourceRef: '{{$guid}}'
     }
+  }
+}
+
+export const CORRECT_TRANSACTION_BODY = {
+  details: 'Card topup',
+  effectiveDate: getCurrentDateString(),
+  money: {
+    amount: 238,
+    currencyCode: 'EUR'
+  },
+  source: {
+    sourceName: 'CARD_TOPUP',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  },
+  transactionTypeCode: 'CARD_TOPUP'
+}
+
+export const CORRECT_PAYMENT_BODY = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: 'NOTPROVIDED',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
   }
 }

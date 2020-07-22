@@ -1,6 +1,10 @@
-import 'cypress-localstorage-commands'
+import {
+  createAccount,
+  createCustomer,
+  getAccountBalance,
+  setHeadersAuthToken
+} from '../../utils/account'
 import { GET_HEADERS, POST_HEADERS } from '../../constants/authentication-const'
-import { createCustomer, assertAccountValues, createAccount, getAccount, setHeadersAuthToken } from '../../utils/account.js'
 import { CORRECT_ACCOUNT_BODY, CORRECT_CUSTOMER_BODY } from '../../constants/account-const'
 
 describe('Create account API tests', () => {
@@ -13,30 +17,27 @@ describe('Create account API tests', () => {
     cy.restoreLocalStorage()
   })
 
-  it('Should Create an Account with Correct Body and Headers', () => {
+  it('Should get balance of an account, when entering correct headers and account id', () => {
     let personId
     let personName
     setHeadersAuthToken()
 
     createCustomer(POST_HEADERS, CORRECT_CUSTOMER_BODY)
       .then((resp) => {
-        expect(resp.status).to.eq(200)
         personId = resp.body.data.personId
         personName = resp.body.data.name
         const reqBody = CORRECT_ACCOUNT_BODY(personId, personName)
-
         createAccount(personId, POST_HEADERS, reqBody)
           .then((resp) => {
-            assertAccountValues(reqBody, resp)
             const accountId = resp.body.data.accountId
-
-            getAccount(accountId, GET_HEADERS)
+            getAccountBalance(accountId, GET_HEADERS)
               .then((resp) => {
-                assertAccountValues(reqBody, resp)
+                expect(resp.status).to.eq(200)
+                expect(resp.body.data).to.not.be.empty
+                // TODO: why that kind of solution??
+                expect(resp.body.data[0].accountId).to.eq(accountId)
               })
           })
       })
   })
-
-  it()
 })
