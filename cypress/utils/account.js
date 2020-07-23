@@ -55,7 +55,7 @@ export const assertAccountValues = (reqBody, resp) => {
 }
 
 export const assertTransactionValues = (reqBody, resp) => {
-  const respBody = resp.body.data[0]
+  const respBody = resp.body.data[1]
 
   expect(resp.status).to.eq(200)
   expect(respBody.amount).to.eq(reqBody.money.amount)

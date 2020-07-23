@@ -9,6 +9,11 @@
   "devDependencies": {
     "standard": "^14.3.4"
   },
+  "scripts" : {
+    "cy:chrome": "npx cypress run --record --key 90a5ef8f-f602-40d4-9824-8dec4363024b --browser chrome --spec 'cypress/integration/api/**'",
+    "cy:firefox": "npx cypress run --record --key 90a5ef8f-f602-40d4-9824-8dec4363024b --browser firefox --spec 'cypress/integration/api/**'",
+    "cy:edge": "npx cypress run --record --key 90a5ef8f-f602-40d4-9824-8dec4363024b --browser edge --spec 'cypress/integration/api/**'"
+  },
   "standard": {
     "globals": [
       "cy",

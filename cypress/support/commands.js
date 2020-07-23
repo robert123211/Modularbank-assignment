@@ -36,5 +36,6 @@ Cypress.Commands.add('authenticate', () => {
     .its('body')
     .then((body) => {
       cy.setLocalStorage('token', body.data.token)
+      cy.saveLocalStorage()
     })
 })

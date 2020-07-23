@@ -8,13 +8,9 @@ import { GET_HEADERS, POST_HEADERS } from '../../constants/authentication-const'
 import { CORRECT_ACCOUNT_BODY, CORRECT_CUSTOMER_BODY } from '../../constants/account-const'
 
 describe('Create account API tests', () => {
-  before(() => {
-    cy.authenticate()
-    cy.saveLocalStorage()
-  })
 
   beforeEach(() => {
-    cy.restoreLocalStorage()
+    cy.authenticate()
   })
 
   it('Should get balance of an account, when entering correct headers and account id', () => {

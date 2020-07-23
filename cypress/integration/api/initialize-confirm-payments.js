@@ -14,13 +14,9 @@ import {
 } from '../../constants/account-const'
 
 describe('Create account API tests', () => {
-  before(() => {
-    cy.authenticate()
-    cy.saveLocalStorage()
-  })
 
   beforeEach(() => {
-    cy.restoreLocalStorage()
+    cy.authenticate()
   })
 
   it('Payment should be made and seen in balance, if it is created and confirmed', () => {
@@ -40,7 +36,7 @@ describe('Create account API tests', () => {
 
             createTransaction(accountId, POST_HEADERS, CORRECT_TRANSACTION_BODY)
               .then((resp) => {
-                const balance = resp.body.data[0].amount - resp.body.data[1].amount
+                const balance = resp.body.data[1].amount - resp.body.data[0].amount
 
                 createPayment(accountId, POST_HEADERS, CORRECT_PAYMENT_BODY)
                   .then((resp) => {
@@ -81,7 +77,7 @@ describe('Create account API tests', () => {
             const accountId = resp.body.data.accountId
             createTransaction(accountId, POST_HEADERS, CORRECT_TRANSACTION_BODY)
               .then((resp) => {
-                const balance = resp.body.data[0].amount - resp.body.data[1].amount
+                const balance = resp.body.data[1].amount - resp.body.data[0].amount
                 createPayment(accountId, POST_HEADERS, CORRECT_PAYMENT_BODY)
                   .then((resp) => {
                     getAccountBalance(accountId, GET_HEADERS)
