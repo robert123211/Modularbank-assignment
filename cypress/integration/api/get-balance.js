@@ -34,10 +34,13 @@ describe('Create account API tests', () => {
               .then((resp) => {
                 expect(resp.status).to.eq(200)
                 expect(resp.body.data).to.not.be.empty
-                // TODO: why that kind of solution??
                 expect(resp.body.data[0].accountId).to.eq(accountId)
               })
           })
       })
   })
+
+  it('Should not be able to get balance when user is not authorized', () => {})
+
+  it('Should not be able to get balance when currency code is not supported', () => {})
 })

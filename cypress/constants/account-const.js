@@ -74,6 +74,23 @@ export const CORRECT_ACCOUNT_BODY = (personId, personName) => {
   }
 }
 
+export const INVALID_BODY_ACCOUNTTYPE = (personId, personName) => {
+  return {
+    accountName: 'Demo account',
+    accountTypeCode: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    currencyCode: 'EUR',
+    customerGroupCode: 'GROUP_A',
+    personId: personId,
+    personName: personName,
+    priceListTypeCode: 'STANDARD',
+    residencyCountryCode: 'FI',
+    source: {
+      sourceName: 'TEST',
+      sourceRef: '{{$guid}}'
+    }
+  }
+}
+
 export const CORRECT_TRANSACTION_BODY = {
   details: 'Card topup',
   effectiveDate: getCurrentDateString(),

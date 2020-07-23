@@ -7,6 +7,7 @@ import {
   TRANSACTIONS_POST_URL
 } from '../constants/account-const'
 import { GET_HEADERS, POST_HEADERS } from '../constants/authentication-const'
+import faker from 'faker'
 
 export const createCustomer = (headers, requestBody) => {
   return createRequestWithBody('POST', CUSTOMER_POST_URL, headers, requestBody)
@@ -79,4 +80,53 @@ export const assertPaymentValues = (reqBody, resp) => {
   expect(reqBody.source.sourceName).to.eq(respBody.source.sourceName)
   expect(reqBody.source.sourceRef).to.eq(respBody.source.sourceRef)
   expect(reqBody.effectiveDate).to.eq(respBody.effectiveDate)
+}
+
+export const createRandomCustomerBody = () => {
+  return {
+    activityCode: 'ACTIVE',
+    birthDate: '1978-02-28',
+    email: 'qa@modularbank.co',
+    id: faker.random.number(100),
+    identificationNumber: {
+      idCountryCode: 'FI',
+      idNumber: faker.phone.phoneNumber()
+    },
+    name: faker.name.firstName() + faker.name.lastName(),
+    personTypeCode: 'P',
+    sex: 'M',
+    placeOfBirth: 'Helsinki',
+    taxResidencyCountry: 'FI',
+    buildingTypeCode: 'APARTMENT',
+    businessAreaCode: 'FINANCE',
+    acitivityCode: 'EMPLOYEE',
+    dependantPersons: 1,
+    maritalStatusCode: 'SINGLE',
+    nationality: 'FI',
+    countryOfBirth: 'FI',
+    language: 'FI',
+    usResident: false,
+    pep: false,
+    educationCode: 'HIGHER_EDUCATION',
+    employmentTimeCode: 'UP_4_YEAR',
+    fixedEmploymentLength: 5,
+    phoneNumber: faker.phone.phoneNumber,
+    address: {
+      addressTypeCode: 'R',
+      cityCounty: 'Helsinki',
+      countryCode: 'FI',
+      stateRegion: 'Uusimaa',
+      street1: 'Ratamestarinkatu 12',
+      zip: '30800101',
+      moveInDate: '2018-01-20'
+    },
+    correspondenceAddress: {
+      addressTypeCode: 'C',
+      cityCounty: 'Helsinki',
+      countryCode: 'FI',
+      stateRegion: 'Uusimaa',
+      street1: 'Ratamestarinkatu 12',
+      zip: '30800101'
+    }
+  }
 }

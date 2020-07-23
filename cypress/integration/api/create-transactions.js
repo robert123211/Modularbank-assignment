@@ -43,4 +43,10 @@ describe('Create account API tests', () => {
           })
       })
   })
+
+  it('Should not be able to create transaction if user is not authorized', () => {})
+  it('Should not be able to create transaction if account is not found', () => {})
+  it('Should not be able to create transaction if transaction type is invalid', () => {})
+  it('Should not be able to create transaction if fee type transaction is zero', () => {})
+  it('Should not be able to create transaction if user has insufficient funds', () => {})
 })

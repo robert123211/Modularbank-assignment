@@ -3,7 +3,8 @@ export const createRequestWithBody = (method, url, headers, body) => {
     method: method,
     url: url,
     headers: headers,
-    body: body
+    body: body,
+    failOnStatusCode: false
   })
 }
 
@@ -11,6 +12,7 @@ export const createRequestWithoutBody = (method, url, headers) => {
   return cy.request({
     method: method,
     url: url,
-    headers: headers
+    headers: headers,
+    failOnStatusCode: false
   })
 }
