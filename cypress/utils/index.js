@@ -1,9 +1,16 @@
-
+/**
+ * Get current time's timestamp
+ * @returns {number} - timestamp number
+ */
 export const getCurrentTimestamp = () => {
   const date = new Date()
   return date.getTime()
 }
 
+/**
+ * Get current date in YYYY-MM-DD format
+ * @returns {string} - Current date
+ */
 export const getCurrentDateString = () => {
   const date = new Date()
   const monthNrInt = date.getMonth() + 1

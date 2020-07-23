@@ -9,39 +9,93 @@ import {
 import { GET_HEADERS, POST_HEADERS } from '../constants/authentication-const'
 import faker from 'faker'
 
+/**
+ * Create customer through API
+ * @param headers - Headers sent with the request
+ * @param requestBody - Body sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const createCustomer = (headers, requestBody) => {
   return createRequestWithBody('POST', CUSTOMER_POST_URL, headers, requestBody)
 }
 
+/**
+ * Create account through API
+ * @param personId - Unique person identifier
+ * @param headers - Headers sent with the request
+ * @param requestBody - Body sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const createAccount = (personId, headers, requestBody) => {
   return createRequestWithBody('POST', ACCOUNT_POST_URL(personId), headers, requestBody)
 }
 
+/**
+ * Create transaction through API
+ * @param headers - Headers sent with the request
+ * @param accountId - Unique account identifier
+ * @param requestBody - Body sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const createTransaction = (accountId, headers, requestBody) => {
   return createRequestWithBody('POST', TRANSACTIONS_POST_URL(accountId), headers, requestBody)
 }
 
+/**
+ * Create payment through API
+ * @param accountId - Unique account identifier
+ * @param headers - Headers sent with the request
+ * @param requestBody - Body sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const createPayment = (accountId, headers, requestBody) => {
   return createRequestWithBody('POST', PAYMENTS_INITIALISE_URL(accountId), headers, requestBody)
 }
 
+/**
+ * Confirm payment through API
+ * @param accountId - Unique account identifier
+ * @param paymentId - Unique payment identifier
+ * @param headers - Headers sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const confirmPayment = (accountId, paymentId, headers) => {
   return createRequestWithoutBody('POST', PAYMENTS_CONFIRM_URL(accountId, paymentId), GET_HEADERS)
 }
 
+/**
+ * Get account by account id
+ * @param accountId - Unique account identifier
+ * @param headers - Headers sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const getAccount = (accountId, headers) => {
   return createRequestWithoutBody('GET', ACCOUNT_GET_URL(accountId), headers)
 }
 
+/**
+ * Get account's balance
+ * @param accountId - Unique account identifier
+ * @param headers - Headers sent with the request
+ * @returns {Cypress.Chainable<Cypress.Response>}
+ */
 export const getAccountBalance = (accountId, headers) => {
   return createRequestWithoutBody('GET', BALANCES_GET_URL(accountId), headers)
 }
 
+/**
+ * Set x-auth-token header, which value is taken from local storage
+ */
 export const setHeadersAuthToken = () => {
   POST_HEADERS['x-auth-token'] = localStorage.getItem('token')
   GET_HEADERS['x-auth-token'] = localStorage.getItem('token')
 }
 
+/**
+ * Assert account request's values to response value's to verify if the endpoint is working correctly
+ * @param reqBody - Request body
+ * @param resp - Response from request
+ */
 export const assertAccountValues = (reqBody, resp) => {
   const respBody = resp.body.data
   expect(resp.status).to.eq(200)
@@ -54,6 +108,11 @@ export const assertAccountValues = (reqBody, resp) => {
   expect(respBody.residencyCode).to.eq(reqBody.residencyCountryCode)
 }
 
+/**
+ * Assert transaction request's values to response value's to verify if the endpoint is working correctly
+ * @param reqBody - Request body
+ * @param resp - Response from request
+ */
 export const assertTransactionValues = (reqBody, resp) => {
   const respBody = resp.body.data[1]
 
@@ -67,6 +126,11 @@ export const assertTransactionValues = (reqBody, resp) => {
   expect(respBody.transactionTypeCode).to.eq(reqBody.transactionTypeCode)
 }
 
+/**
+ * Assert payment request's values to response value's to verify if the endpoint is working correctly
+ * @param reqBody - Request body
+ * @param resp - Response from request
+ */
 export const assertPaymentValues = (reqBody, resp) => {
   const respBody = resp.body.data
 
@@ -82,6 +146,10 @@ export const assertPaymentValues = (reqBody, resp) => {
   expect(reqBody.effectiveDate).to.eq(respBody.effectiveDate)
 }
 
+/**
+ * Create correct customer body for customer request, which involves randomly generated name and phone number
+ * @returns {{taxResidencyCountry: string, language: string, educationCode: string, correspondenceAddress: {zip: string, addressTypeCode: string, countryCode: string, stateRegion: string, street1: string, cityCounty: string}, activityCode: string, maritalStatusCode: string, countryOfBirth: string, fixedEmploymentLength: number, pep: boolean, id: (*|boolean), email: string, placeOfBirth: string, address: {zip: string, addressTypeCode: string, moveInDate: string, countryCode: string, stateRegion: string, street1: string, cityCounty: string}, sex: string, personTypeCode: string, birthDate: string, employmentTimeCode: string, buildingTypeCode: string, acitivityCode: string, phoneNumber: Faker.phone.phoneNumber, nationality: string, businessAreaCode: string, usResident: boolean, name: *, identificationNumber: {idCountryCode: string, idNumber: *}, dependantPersons: number}}
+ */
 export const createRandomCustomerBody = () => {
   return {
     activityCode: 'ACTIVE',
