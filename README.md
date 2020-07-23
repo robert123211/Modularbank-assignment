@@ -22,7 +22,7 @@ This repository contains the Modularbank QA Engineer test assignment.
 * All tests are written in Cypress framework
 * Prerequisite is to have latest node downloaded
 * Run command `npm install` from project directory to install dependencies
-
+* Run command `npm run cy:chrome` to run tests in chrome, You can also use edge or firefox in the end for these browsers.
 ## Test results
 
 Test results can be seen through  [Cypress Dashboard](https://dashboard.cypress.io/login)
