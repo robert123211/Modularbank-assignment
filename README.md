@@ -53,6 +53,7 @@ Test results can be seen through  [Cypress Dashboard](https://dashboard.cypress.
 * When inserting an unknown account ID while creating a transaction - Error "err.technical" is shown in response and not "err.accountNotFound", which would be more reasonable
 * Transactions can be created when fee transaction type is invalid (In this case the type was zero, but couldn't confirm if it is a bug or mistake in Swagger)
 * When inserting an invalid payment type code, the response is 500 with message "err.technical" (400 with "err.paymentTypeCodeInvalid" should be the expected response and message, when checking Swagger)
+* When multiple errors come up from request body, only one error message is shown
 
 ## Integrating the test plan to CI/CD
 Easiest way to integrate tests into CI would be using Jenkins. For this user has to integrate current git repository to a specific Jenkins pipeline. Tests can be run in one specific machine using the example Jenkinsfile I have created into
