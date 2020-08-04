@@ -127,7 +127,7 @@ export const INVALID_BODY_CUSTOMER_GROUP = (personId, personName) => {
   }
 }
 
-export const INVALID_BODY_PRICE_LIST  = (personId, personName) => {
+export const INVALID_BODY_PRICE_LIST = (personId, personName) => {
   return {
     accountName: 'Demo account',
     accountTypeCode: 'CURRENCY',
@@ -194,11 +194,11 @@ export const TRANSACTION_BODY_WITH_FEE_TRANSACTION_TYPE_ZERO = {
     currencyCode: 'EUR'
   },
   fee: {
-    details: "Fee",
-    effectiveDate: "2020-08-03",
+    details: 'Fee',
+    effectiveDate: '2020-08-03',
     money: {
       amount: 0,
-      currencyCode: "EUR"
+      currencyCode: 'EUR'
     },
     source: {
       sourceName: 'CARD_TOPUP',
@@ -286,6 +286,28 @@ export const PAYMENT_AMOUNT_NOT_POSITIVE_BODY = {
   endToEndId: 'NOTPROVIDED',
   money: {
     amount: -24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_COUNTER_PARTY_IBAN_INVALID = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010145'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: 'NOTPROVIDED',
+  money: {
+    amount: 24.35,
     currencyCode: 'EUR'
   },
   paymentTransferTypeCode: 'INSTANTREGULAR',
@@ -399,5 +421,193 @@ export const PAYMENT_WITHOUT_SOURCE_REF_BODY = {
   paymentTypeCode: 'ACC2SEPA',
   source: {
     sourceName: 'PAYMENT'
+  }
+}
+
+export const PAYMENT_TYPE_CODE_INVALID_BODY = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: 'NOTPROVIDED',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'BLALABLABLABLA2',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_INVALID_END_TO_END_ID_BODY = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: '!#€%&/',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_REFERENCE_NUMBER_INVALID_BODY = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  referenceNumber: '!!!!!!',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: 'NOTPROVIDED',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const CORRECT_PAYMENT_BODY_WITH_E2E_ID = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: '1',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_BODY_WITHOUT_REF_AND_DETAILS = {
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: 'NOTPROVIDED',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_WITH_CONTRACT_SOURCE_NAME_MISSING_BODY = {
+  contractSource: {
+    sourceRef: 'ID-181922',
+    contractNumber: '1122241515'
+  },
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: '1',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_WITH_CONTRACT_SOURCE_REF_MISSING_BODY = {
+  contractSource: {
+    sourceName: 'LOAN.CONTRACT',
+    contractNumber: '1122241515'
+  },
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: '1',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
+  }
+}
+
+export const PAYMENT_WITH_CONTRACT_SOURCE_NUMBER_MISSING_BODY = {
+  contractSource: {
+    sourceName: 'LOAN.CONTRACT',
+    sourceRef: 'ID-181922'
+  },
+  counterparty: {
+    counterpartyTypeCode: 'IBAN',
+    name: 'Ben Ficher',
+    value: 'EE459999000000010140'
+  },
+  details: 'Details',
+  directionCode: 'OUT',
+  effectiveDate: '2020-06-08',
+  endToEndId: '1',
+  money: {
+    amount: 24.35,
+    currencyCode: 'EUR'
+  },
+  paymentTransferTypeCode: 'INSTANTREGULAR',
+  paymentTypeCode: 'ACC2SEPA',
+  source: {
+    sourceName: 'PAYMENT',
+    sourceRef: `ID-${getCurrentTimestamp()}`
   }
 }

@@ -83,6 +83,7 @@ describe('Create account API tests', () => {
           })
       })
   })
+
   it('Should not be able to create account if account customer group is invalid', () => {
     setHeadersAuthToken()
 
@@ -100,8 +101,8 @@ describe('Create account API tests', () => {
       })
   })
 
-  //TODO: MISSING INPUT FOR NOT ACTIVE CUSTOMER GROUPS
-  it('Should not be able to create account if account customer group is not active', () => {})
+  // TODO: MISSING INPUT FOR NOT ACTIVE CUSTOMER GROUPS
+  it.skip('Should not be able to create account if account customer group is not active', () => {})
 
   it('Should not be able to create account if account price list is not active', () => {
     setHeadersAuthToken()

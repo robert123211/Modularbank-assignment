@@ -7,7 +7,7 @@ pipeline {
     }
     stages {
         stage('Clone tests repo') {
-                git branch: 'testJenkins', url: 'git@github.com:robert123211/Modularbank-assignment.git'
+                git branch: 'master', url: 'git@github.com:robert123211/Modularbank-assignment.git'
             }
 
         stage('Install all dependencies') {
@@ -18,3 +18,4 @@ pipeline {
             sh 'npm run cy:chrome'
         }
     }
+}

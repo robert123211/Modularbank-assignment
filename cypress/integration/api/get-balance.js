@@ -8,7 +8,6 @@ import { GET_HEADERS, POST_HEADERS } from '../../constants/authentication-const'
 import { CORRECT_ACCOUNT_BODY, CORRECT_CUSTOMER_BODY } from '../../constants/account-const'
 
 describe('Create account API tests', () => {
-
   it('Should get balance of an account, when entering correct headers and account id', () => {
     cy.authenticate().then(() => {
       setHeadersAuthToken()
@@ -32,6 +31,6 @@ describe('Create account API tests', () => {
     })
   })
 
-  //TODO: No documentation for get request with currency code
-  it('Should not be able to get balance when currency code is not supported', () => {})
+  // TODO: No documentation for get request with currency code
+  it.skip('Should not be able to get balance when currency code is not supported', () => {})
 })

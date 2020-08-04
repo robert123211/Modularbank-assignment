@@ -23,6 +23,7 @@ This repository contains the Modularbank QA Engineer test assignment.
 * Prerequisite is to have latest node downloaded
 * Run command `npm install` from project directory to install dependencies
 * Run command `npm run cy:chrome` to run tests in chrome, You can also use edge or firefox in the end for these browsers.
+
 ## Test results
 
 Test results can be seen through  [Cypress Dashboard](https://dashboard.cypress.io/login)
@@ -30,7 +31,29 @@ Test results can be seen through  [Cypress Dashboard](https://dashboard.cypress.
 * Username `testassignmentkrikk@gmail.com`
 * Password `Modularbank`
 * Latest run shows the latest findings - there are still more findings as the tests are not fully implemented yet.
-Currently it seems that Swagger doesn't have up to date information or is buggy - 400 errors are all not reproducable and include also 500 errors 
+
+## Documentation & Swagger findings
+* Swagger is not up to date and contains multiple typos
+    * err.technical is always thrown as a error message for 500 response, but in the Swagger it is shown as a 400 response
+    * Typos like err.paymentCounterpartyIbanBicNotFounderr.paymentDetailsMissing are rather casual
+* Documentation and Swagger is currently not enough to test every negative scenario, where error is given. In some cases the error response messages are intuitive and no need to explain, but not always.
+    * For this reason there are some test cases which are skipped in the test suite and TODO's are added
+    * For Confirming the payment, there was no documentation at all for reproducing error messages shown in Swagger
+
+## Test findings
+
+### Positive findings
+* Endpoint authorization works correctly
+    * If the authentication header is set, every endpoint works for user.
+    * 401 unauthorized is given with every endpoint when user is not authorized
+* Main useflow works nicely, when input data is correct
+
+### Bugs
+* Account can be created when the holder's name is invalid - For example !"#!"#€ can't be a real person name
+* When inserting an unknown account ID while creating a transaction - Error "err.technical" is shown in response and not "err.accountNotFound", which would be more reasonable
+* Transactions can be created when fee transaction type is invalid (In this case the type was zero, but couldn't confirm if it is a bug or mistake in Swagger)
+* When inserting an invalid payment type code, the response is 500 with message "err.technical" (400 with "err.paymentTypeCodeInvalid" should be the expected response and message, when checking Swagger)
+
 ## Integrating the test plan to CI/CD
 Easiest way to integrate tests into CI would be using Jenkins. For this user has to integrate current git repository to a specific Jenkins pipeline. Tests can be run in one specific machine using the example Jenkinsfile I have created into
 the repository. In the Jenkins UI, the user can set up the interval, when the tests are run.
