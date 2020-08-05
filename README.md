@@ -30,7 +30,6 @@ Test results can be seen through  [Cypress Dashboard](https://dashboard.cypress.
 * Login with Google account
 * Username `testassignmentkrikk@gmail.com`
 * Password `Modularbank`
-* Latest run shows the latest findings - there are still more findings as the tests are not fully implemented yet.
 
 ## Documentation & Swagger findings
 * Swagger is not up to date and contains multiple typos
